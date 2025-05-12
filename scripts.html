@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scripts | Ghostline Network</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between p-6 border-b border-gray-800 shadow-lg">
+    <h1 class="text-3xl font-extrabold text-purple-500">Ghostline Network</h1>
+    <nav class="space-x-6 text-gray-300">
+      <a href="home.html" class="hover:text-white transition">Home</a>
+      <a href="https://ghostline-network.tebex.io" class="hover:text-white transition">Store</a>
+      <a href="https://discord.gg/uEF8e5CGV3" class="hover:text-white transition">Discord</a>
+    </nav>
+    <div class="space-x-4">
+      <a href="https://discord.gg/uEF8e5CGV3" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl transition">
+        Join Discord
+      </a>
+      <a href="https://discord.com/oauth2/authorize?client_id=1343801578817192006&permissions=930128914480&integration_type=0&scope=bot" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition">
+        Invite Bot for the verification script
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="text-center py-20 px-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black" data-aos="fade-up">
+    <h2 class="text-4xl font-extrabold mb-4">Our Scripts</h2>
+    <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+      Explore high-performance scripts for FiveM — open-source, easy to use, and made for performance.
+    </p>
+  </section>
+
+  <!-- Filters Section -->
+  <section class="py-10 px-6 bg-gray-800">
+    <div class="flex justify-between items-center max-w-6xl mx-auto">
+      <div class="space-x-4">
+        <label for="category" class="text-sm text-gray-300">Filter by Category:</label>
+        <select id="category" class="bg-gray-700 text-gray-300 py-2 px-4 rounded-md">
+          <option value="all">All Categories</option>
+          <option value="utility">Utility</option>
+          <option value="roleplay">Roleplay</option>
+          <option value="premium">Premium</option>
+        </select>
+      </div>
+      <div class="space-x-4">
+        <label for="price" class="text-sm text-gray-300">Sort by:</label>
+        <select id="price" class="bg-gray-700 text-gray-300 py-2 px-4 rounded-md">
+          <option value="all">All Scripts</option>
+          <option value="free">Free Scripts</option>
+          <option value="premium">Premium Scripts</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts Grid -->
+  <section class="py-20 px-6 max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-8" id="scripts-grid">
+
+      <!-- Ghostline Duty Menu with "Free" tag -->
+      <div class="bg-gray-800 rounded-xl p-6 hover:shadow-xl transition" data-aos="fade-up" data-category="utility" data-price="free">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold mb-2 text-purple-400">Ghostline Duty Menu</h3>
+          <!-- Free Tag -->
+          <span class="bg-blue-500 text-white text-xs py-1 px-3 rounded-full">Free</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-4">Custom-duty menu system built for roleplay servers. Fully open-source and configurable.</p>
+        <a href="https://github.com/Ghostline-Network/Ghostline-Duty-Menu" class="text-purple-500 hover:underline">View on GitHub</a>
+      </div>
+
+      <!-- Ghostline Verification System with "Ghostline Verification" tag -->
+      <div class="bg-gray-800 rounded-xl p-6 hover:shadow-xl transition" data-aos="fade-up" data-category="utility" data-price="premium">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold mb-2 text-purple-400">Ghostline Verification System</h3>
+          <!-- Ghostline Verification Badge -->
+          <span class="bg-green-500 text-white text-xs py-1 px-3 rounded-full">Ghostline Verification</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-4">Easily integrate Ghostline's verification system into your scripts. Ensure only trusted users can access your premium features.</p>
+        <a href="https://ghostline-network.tebex.io/package/verification" class="text-purple-500 hover:underline">View on Tebex</a>
+      </div>
+
+      <!-- Add more script cards here as needed -->
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-gray-500 text-sm border-t border-gray-800" data-aos="fade-up">
+    &copy; <script>document.write(new Date().getFullYear())</script> Ghostline Network. All rights reserved.
+  </footer>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    // JavaScript for filtering
+    document.getElementById('category').addEventListener('change', filterScripts);
+    document.getElementById('price').addEventListener('change', filterScripts);
+
+    function filterScripts() {
+      const categoryFilter = document.getElementById('category').value;
+      const priceFilter = document.getElementById('price').value;
+      const scripts = document.querySelectorAll('#scripts-grid .bg-gray-800');
+
+      scripts.forEach(script => {
+        const scriptCategory = script.getAttribute('data-category');
+        const scriptPrice = script.getAttribute('data-price');
+
+        let categoryMatch = (categoryFilter === 'all' || scriptCategory === categoryFilter);
+        let priceMatch = (priceFilter === 'all' || scriptPrice === priceFilter);
+
+        if (categoryMatch && priceMatch) {
+          script.style.display = 'block';
+        } else {
+          script.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
